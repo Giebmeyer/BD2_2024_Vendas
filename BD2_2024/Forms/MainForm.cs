@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using BD2_2024.models;
+using Npgsql;
 using PostgresConnectionExample;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BD2_2024.models.Products;
 
 namespace BD2_2024.Forms
 {
@@ -51,42 +53,8 @@ namespace BD2_2024.Forms
 
         private void listProducts()
         {
-            listViewProducts.View = View.Details;
-            listViewProducts.LabelEdit = true;
-            listViewProducts.AllowColumnReorder = true;
-            listViewProducts.GridLines = true;
-
-            listViewProducts.Columns.Add("Código", 30, HorizontalAlignment.Left);
-            listViewProducts.Columns.Add("Descrição", 200, HorizontalAlignment.Left);
-            listViewProducts.Columns.Add("Valor", 95, HorizontalAlignment.Left);
-            listViewProducts.Columns.Add("Estoque", 95, HorizontalAlignment.Left);
-            listViewProducts.Columns.Add("Fornecedor", 95, HorizontalAlignment.Left);
-
-            using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
-            {
-                using (var command = new NpgsqlCommand("SELECT * FROM tb_produtos;", connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string[] row = {
-                                reader.GetInt64(0).ToString(),
-                                reader.GetString(1),
-                                reader.GetDouble(2).ToString(),
-                                reader.GetInt16(3).ToString(),
-                                reader.GetInt64(4).ToString()
-
-                             };
-
-                            var listViewItem = new ListViewItem(row);
-
-                            listViewProducts.Items.Add(listViewItem);
-                        }
-                        connection.Close();
-                    }
-                }
-            }
+            Products products = new Products();
+            products.listProductsInMain(listViewProducts);
         }
     }
 }
