@@ -39,7 +39,7 @@ namespace BD2_2024
                 showMessageBox("Preencha todos os campos.");
             } 
             else
-            {
+            { 
                 try
                 {
                     var connectionString = $"Host=127.0.0.1;Port={port};Username={txtUsuario};Password={txtSenha};Database=mySales";
