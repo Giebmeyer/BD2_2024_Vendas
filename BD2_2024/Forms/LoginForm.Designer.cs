@@ -47,6 +47,7 @@ namespace BD2_2024
             this.txtBoxLoginUsuario.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtBoxLoginUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBoxLoginUsuario.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxLoginUsuario.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtBoxLoginUsuario.Location = new System.Drawing.Point(77, 127);
             this.txtBoxLoginUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxLoginUsuario.MaxLength = 15;
@@ -63,6 +64,7 @@ namespace BD2_2024
             this.txtBoxLoginSenha.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtBoxLoginSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBoxLoginSenha.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxLoginSenha.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtBoxLoginSenha.Location = new System.Drawing.Point(77, 175);
             this.txtBoxLoginSenha.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxLoginSenha.MaxLength = 15;

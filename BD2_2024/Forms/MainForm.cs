@@ -56,5 +56,16 @@ namespace BD2_2024.Forms
             Products products = new Products();
             products.listProductsInMain(listViewProducts);
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            MainForm_Load(sender, e);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
