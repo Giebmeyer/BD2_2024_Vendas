@@ -37,6 +37,7 @@ namespace PostgresConnectionExample
         {
             if (_connection.State == System.Data.ConnectionState.Closed || _connection.State == System.Data.ConnectionState.Broken)
             {
+                _connection = new NpgsqlConnection(_connectionString);
                 _connection.Open();
             }
             return _connection;
