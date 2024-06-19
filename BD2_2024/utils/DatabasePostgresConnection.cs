@@ -50,5 +50,13 @@ namespace PostgresConnectionExample
                 _connection.Close();
             }
         }
+
+        public void ExecuteCommand(string commandText)
+        {
+            using (var cmd = new NpgsqlCommand(commandText, _connection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

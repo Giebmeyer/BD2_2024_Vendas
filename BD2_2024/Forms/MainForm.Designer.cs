@@ -143,7 +143,7 @@ namespace BD2_2024.Forms
             // lblValorTotal
             // 
             this.lblValorTotal.AutoSize = true;
-            this.lblValorTotal.Location = new System.Drawing.Point(259, 604);
+            this.lblValorTotal.Location = new System.Drawing.Point(256, 580);
             this.lblValorTotal.Name = "lblValorTotal";
             this.lblValorTotal.Size = new System.Drawing.Size(71, 16);
             this.lblValorTotal.TabIndex = 7;
@@ -152,7 +152,7 @@ namespace BD2_2024.Forms
             // lblQtdeProdutos
             // 
             this.lblQtdeProdutos.AutoSize = true;
-            this.lblQtdeProdutos.Location = new System.Drawing.Point(259, 628);
+            this.lblQtdeProdutos.Location = new System.Drawing.Point(256, 604);
             this.lblQtdeProdutos.Name = "lblQtdeProdutos";
             this.lblQtdeProdutos.Size = new System.Drawing.Size(101, 16);
             this.lblQtdeProdutos.TabIndex = 8;
@@ -161,7 +161,7 @@ namespace BD2_2024.Forms
             // lblValorTotal_valor
             // 
             this.lblValorTotal_valor.AutoSize = true;
-            this.lblValorTotal_valor.Location = new System.Drawing.Point(336, 604);
+            this.lblValorTotal_valor.Location = new System.Drawing.Point(333, 580);
             this.lblValorTotal_valor.Name = "lblValorTotal_valor";
             this.lblValorTotal_valor.Size = new System.Drawing.Size(51, 16);
             this.lblValorTotal_valor.TabIndex = 9;
@@ -170,7 +170,7 @@ namespace BD2_2024.Forms
             // lblQtdeProdutos_valor
             // 
             this.lblQtdeProdutos_valor.AutoSize = true;
-            this.lblQtdeProdutos_valor.Location = new System.Drawing.Point(366, 628);
+            this.lblQtdeProdutos_valor.Location = new System.Drawing.Point(363, 604);
             this.lblQtdeProdutos_valor.Name = "lblQtdeProdutos_valor";
             this.lblQtdeProdutos_valor.Size = new System.Drawing.Size(14, 16);
             this.lblQtdeProdutos_valor.TabIndex = 10;

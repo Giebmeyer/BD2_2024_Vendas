@@ -52,20 +52,49 @@ namespace BD2_2024.Forms
             lblValorTotal_valor.Visible = true;
             btnRegistraVenda.Visible = true;
         }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-
             hideNewVenda();
 
+                listProducts();
+                CheckUserGroupAndDisableButton();
+            
+        }
+
+        private void CheckUserGroupAndDisableButton()
+        {
             using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
             {
-                listProducts();
+                try
+                {
+                    string currentUser = "current_user";
+                    string query = "SELECT 1 FROM pg_user u JOIN pg_group g ON u.usesysid = ANY(g.grolist) " +
+                        "WHERE u.usename = current_user AND g.groname = 'grupo_funcionarios'";
+
+                    using (var command = new NpgsqlCommand(query, connection))
+                    {
+                        var result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            BtnCdstFuncionario.Enabled = false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    showMessageBox($"Erro ao verificar o grupo do usuário: {ex.Message}");
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             hideNewVenda();
+
+            Form cadastrarUsuarioForm = new CadastrarUsuarioForm();
+            cadastrarUsuarioForm.Show();
         }
 
         private void listProducts()
@@ -73,7 +102,6 @@ namespace BD2_2024.Forms
             dataGridProdutos.Columns.Clear();
             dataGridProdutos.Rows.Clear();
 
-            // Adicionar colunas ao DataGridView de produtos
             dataGridProdutos.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Select", HeaderText = "Select" });
             dataGridProdutos.Columns.Add("Código", "Código");
             dataGridProdutos.Columns.Add("Descrição", "Descrição");
@@ -104,7 +132,6 @@ namespace BD2_2024.Forms
             dataGridProdutos.CellContentClick += new DataGridViewCellEventHandler(dataGridProdutos_CellContentClick);
             dataGridProdutosSelecionados.CellValueChanged += new DataGridViewCellEventHandler(dataGridProdutosSelecionados_CellValueChanged);
 
-            // Configurar dataGridProdutosSelecionados
             dataGridProdutosSelecionados.Columns.Clear();
             dataGridProdutosSelecionados.Rows.Clear();
 
@@ -146,7 +173,7 @@ namespace BD2_2024.Forms
                         }
                         else
                         {
-                            currentQuantity = 1; 
+                            currentQuantity = 1;
                         }
 
                         if (currentQuantity > 1)
@@ -222,7 +249,8 @@ namespace BD2_2024.Forms
 
         private void UpdateTotalQuantityLabel()
         {
-            if (totalQuantity.ToString().Length > 0) {
+            if (totalQuantity.ToString().Length > 0)
+            {
                 btnRegistraVenda.Enabled = true;
             }
             else
@@ -243,10 +271,8 @@ namespace BD2_2024.Forms
                 {
                     transaction = connection.BeginTransaction();
 
-                    // Insert into tb_vendas
                     using (var command = new NpgsqlCommand("INSERT INTO tb_vendas (ven_horario, ven_valor_total) VALUES (@ven_horario, @ven_valor_total) RETURNING ven_codigo", connection))
                     {
-                        // Calculate total value of products sold
                         double totalValue = 0.0;
                         foreach (DataGridViewRow row in dataGridProdutosSelecionados.Rows)
                         {
@@ -261,7 +287,6 @@ namespace BD2_2024.Forms
                         venCodigo = (long)command.ExecuteScalar();
                     }
 
-                    // Insert into tb_vendas_itens
                     foreach (DataGridViewRow row in dataGridProdutosSelecionados.Rows)
                     {
                         long proCodigo = Convert.ToInt64(row.Cells["Código"].Value);
@@ -269,7 +294,6 @@ namespace BD2_2024.Forms
                         double valorUnitario = Convert.ToDouble(row.Cells["Valor"].Value);
                         double valorParcial = quantidade * valorUnitario;
 
-                        // Verify if proCodigo exists in tb_produtos
                         bool proCodigoExists;
                         using (var checkCommand = new NpgsqlCommand("SELECT COUNT(*) FROM tb_produtos WHERE pro_codigo = @pro_codigo", connection))
                         {
@@ -291,15 +315,13 @@ namespace BD2_2024.Forms
                         }
                         else
                         {
-                            // Handle case where proCodigo does not exist in tb_produtos
-                           // throw new Exception($"Produto com código {proCodigo} não encontrado.");
+                            // throw new Exception($"Produto com código {proCodigo} não encontrado.");
+                            // transaction.Rollback();
                         }
                     }
 
-                    // Commit transaction if all operations succeed
                     transaction.Commit();
 
-                    // Clear selected products and update UI
                     selectedProducts.Clear();
                     dataGridProdutosSelecionados.Rows.Clear();
                     totalValue = 0.0;
@@ -307,7 +329,8 @@ namespace BD2_2024.Forms
                     UpdateTotalValueLabel();
                     UpdateTotalQuantityLabel();
 
-                    // Show success message
+                    UncheckAllProductCheckboxes();
+
                     showMessageBox("Venda registrada com sucesso!");
                 }
             }
@@ -330,6 +353,18 @@ namespace BD2_2024.Forms
                 finally
                 {
                     showMessageBox($"Erro ao registrar venda: {ex.Message}", "Erro");
+                }
+            }
+        }
+
+        private void UncheckAllProductCheckboxes()
+        {
+            foreach (DataGridViewRow row in dataGridProdutos.Rows)
+            {
+                DataGridViewCheckBoxCell checkboxCell = row.Cells["Select"] as DataGridViewCheckBoxCell;
+                if (checkboxCell != null)
+                {
+                    checkboxCell.Value = false;
                 }
             }
         }
