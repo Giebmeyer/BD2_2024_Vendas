@@ -59,6 +59,7 @@ namespace BD2_2024.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+                lblTitulo.Text = "Adicionar venda";
                 listProducts();
                 CheckUserGroupAndDisableButton();
             
@@ -70,23 +71,24 @@ namespace BD2_2024.Forms
             {
                 try
                 {
-                    string currentUser = "current_user";
-                    string query = "SELECT 1 FROM pg_user u JOIN pg_group g ON u.usesysid = ANY(g.grolist) " +
-                        "WHERE u.usename = current_user AND g.groname = 'grupo_funcionarios'";
+                    string query = "SELECT has_table_privilege(current_user, 'tb_funcionarios', 'UPDATE') AS can_update";
 
                     using (var command = new NpgsqlCommand(query, connection))
                     {
-                        var result = command.ExecuteScalar();
-
-                        if (result != null)
+                        using (var reader = command.ExecuteReader())
                         {
-                            BtnCdstFuncionario.Enabled = false;
+                            if (reader.Read())
+                            {
+                                bool canInsertProducts = reader.GetBoolean(0);
+
+                                BtnCdstFuncionario.Enabled = canInsertProducts;
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    showMessageBox($"Erro ao verificar o grupo do usuário: {ex.Message}");
+                    showMessageBox($"Erro ao verificar permissões do usuário: {ex.Message}");
                 }
             }
         }
@@ -139,6 +141,7 @@ namespace BD2_2024.Forms
             dataGridProdutosSelecionados.Columns.Add("Descrição", "Descrição");
             dataGridProdutosSelecionados.Columns.Add("Valor", "Valor");
             dataGridProdutosSelecionados.Columns.Add("Quantidade", "Quantidade");
+
         }
 
         private void dataGridProdutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -382,19 +385,15 @@ namespace BD2_2024.Forms
             }
         }
 
-        private void BtnNovaVenda_Click(object sender, EventArgs e)
+        private void BtnNovoProduto_Click(object sender, EventArgs e)
         {
             showNewVenda();
-            listViewProducts.Enabled = false;
             lblTitulo.Text = "Adicionar venda";
-            listViewProducts.Visible = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             hideNewVenda();
-            listViewProducts.Enabled = false;
-            listViewProducts.Visible = false;
             lblTitulo.Text = "Editar permissões de usuários";
 
         }
@@ -403,14 +402,23 @@ namespace BD2_2024.Forms
         {
             lblTitulo.Text = "Produtos";
             Products products = new Products();
-            products.listProductsInMain(listViewProducts);
-            listViewProducts.Visible = true;
         }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
             buildMainForm();
             hideNewVenda();
+        }
+
+        private void BtnCdstFuncionario_Click(object sender, EventArgs e)
+        {
+            Form cadastrarUsuarioForm = new CadastrarUsuarioForm();
+            cadastrarUsuarioForm.Show();
+        }
+
+        private void dataGridProdutosSelecionados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
