@@ -316,10 +316,6 @@ namespace BD2_2024.Forms
                                 insertCommand.ExecuteNonQuery();
                             }
                         }
-                        else
-                        {
-                            //throw new Exception($"Produto com código {proCodigo} não encontrado.");
-                        }
                     }
 
                     salesCounter++;
@@ -329,7 +325,7 @@ namespace BD2_2024.Forms
                        // RealizarBackup();
                     }
 
-                    if (dataGridProdutosSelecionados.Rows.Count <= 1)
+                    if (dataGridProdutosSelecionados.Rows.Count <= 1) // Validação para "forçar" o Rollback
                     {
                         transaction.Rollback();
                         throw new Exception($"Venda sem produtos...");

@@ -8,6 +8,8 @@ namespace BD2_2024.Forms
 {
     public partial class CadastrarUsuarioForm : Form
     {
+        private bool isAdmin = false;
+
         public CadastrarUsuarioForm()
         {
             InitializeComponent();
@@ -23,8 +25,34 @@ namespace BD2_2024.Forms
         {
             gridUsuarios.CellContentClick += new DataGridViewCellEventHandler(gridUsuarios_CellContentClick);
 
+            CheckAdminPrivileges();
             LoadGroups();
             LoadUsers();
+        }
+
+        private void CheckAdminPrivileges()
+        {
+            try
+            {
+                using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
+                {
+                    string checkAdminSql = @"
+                    SELECT EXISTS (
+                        SELECT 1
+                        FROM pg_roles
+                        WHERE pg_has_role(current_user, oid, 'member')
+                        AND rolname = 'grupo_administradores')";
+
+                    using (NpgsqlCommand checkAdminCmd = new NpgsqlCommand(checkAdminSql, connection))
+                    {
+                        isAdmin = (bool)checkAdminCmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao verificar privilégios de administrador: {ex.Message}");
+            }
         }
 
         private void LoadGroups()
@@ -33,8 +61,6 @@ namespace BD2_2024.Forms
             {
                 using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
                 {
-                    bool hasAdminGroupPermission = false;
-
                     string loadGroupsSql = "SELECT DISTINCT rolname FROM pg_roles WHERE rolcanlogin = false AND rolname LIKE 'grupo_%'";
 
                     using (NpgsqlCommand loadGroupsCmd = new NpgsqlCommand(loadGroupsSql, connection))
@@ -44,6 +70,11 @@ namespace BD2_2024.Forms
                             while (reader.Read())
                             {
                                 string groupName = reader.GetString(0);
+
+                                if (groupName == "grupo_administradores")
+                                {
+                                    continue;
+                                }
 
                                 comboGrupos.Items.Add(groupName);
                             }
@@ -57,7 +88,6 @@ namespace BD2_2024.Forms
             }
         }
 
-
         private void LoadUsers()
         {
             try
@@ -65,12 +95,12 @@ namespace BD2_2024.Forms
                 using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
                 {
                     string loadUsersSql = @"
-                            SELECT u.usename AS Usuario, r.rolname AS Grupo,
-                                 has_table_privilege(u.usename, 'tb_funcionarios', 'UPDATE') AS PodeCadastrarFuncionarios
-                            FROM pg_user u
-                            LEFT JOIN pg_auth_members m ON u.usesysid = m.member
-                            LEFT JOIN pg_roles r ON m.roleid = r.oid
-                            WHERE r.rolname IS NOT NULL";
+                    SELECT u.usename AS Usuario, r.rolname AS Grupo,
+                           has_table_privilege(u.usename, 'tb_funcionarios', 'UPDATE') AS PodeCadastrarFuncionarios
+                    FROM pg_user u
+                    LEFT JOIN pg_auth_members m ON u.usesysid = m.member
+                    LEFT JOIN pg_roles r ON m.roleid = r.oid
+                    WHERE r.rolname IS NOT NULL";
 
                     using (NpgsqlCommand loadUsersCmd = new NpgsqlCommand(loadUsersSql, connection))
                     {
@@ -97,13 +127,16 @@ namespace BD2_2024.Forms
                                 Name = "Grupo"
                             });
 
-                            DataGridViewCheckBoxColumn checkboxColumn = new DataGridViewCheckBoxColumn
+                            if (isAdmin)
                             {
-                                DataPropertyName = "PodeCadastrarFuncionarios",
-                                HeaderText = "Pode Cadastrar Funcionários",
-                                Name = "PodeCadastrarFuncionarios"
-                            };
-                            gridUsuarios.Columns.Add(checkboxColumn);
+                                DataGridViewCheckBoxColumn checkboxColumn = new DataGridViewCheckBoxColumn
+                                {
+                                    DataPropertyName = "PodeCadastrarFuncionarios",
+                                    HeaderText = "Pode Cadastrar Funcionários",
+                                    Name = "PodeCadastrarFuncionarios"
+                                };
+                                gridUsuarios.Columns.Add(checkboxColumn);
+                            }
 
                             gridUsuarios.DataSource = dataTable;
                         }
@@ -157,7 +190,6 @@ namespace BD2_2024.Forms
                 }
             }
         }
-
 
         private void btnCadastrar_Click_1(object sender, EventArgs e)
         {

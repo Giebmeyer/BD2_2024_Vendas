@@ -119,7 +119,7 @@
             this.comboGrupos.Location = new System.Drawing.Point(414, 35);
             this.comboGrupos.Name = "comboGrupos";
             this.comboGrupos.Size = new System.Drawing.Size(297, 21);
-            this.comboGrupos.TabIndex = 8;
+            this.comboGrupos.TabIndex = 3;
             // 
             // gridUsuarios
             // 

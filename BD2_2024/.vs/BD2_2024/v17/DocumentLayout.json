@@ -3,36 +3,28 @@
   "WorkspaceRootPath": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\utils\\databasepostgresconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:utils\\databasepostgresconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\cadastrarusuarioform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\cadastrarusuarioform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|c:\\projetos\\bd2_2024_vendas\\bd2_2024\\forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{90A8BA49-82F0-4DDA-8A42-3E9529203834}|BD2_2024.csproj|solutionrelative:forms\\cadastrarusuarioform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,107 +34,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CadastrarUsuarioForm.Designer.cs",
-              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.Designer.cs",
-              "RelativeDocumentMoniker": "Forms\\CadastrarUsuarioForm.Designer.cs",
-              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.Designer.cs",
-              "RelativeToolTip": "Forms\\CadastrarUsuarioForm.Designer.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAlwB4AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T03:16:48.482Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "Forms\\MainForm.cs",
-              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs",
-              "RelativeToolTip": "Forms\\MainForm.cs",
-              "ViewState": "AQIAAHIAAAAAAAAAAAAvwIUAAAB1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T02:54:59.494Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "Forms\\MainForm.cs",
               "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs [Design]",
               "RelativeToolTip": "Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T23:11:05.108Z",
+              "WhenOpened": "2024-06-20T11:29:08.489Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CadastrarUsuarioForm.cs",
-              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
-              "RelativeDocumentMoniker": "Forms\\CadastrarUsuarioForm.cs",
-              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
-              "RelativeToolTip": "Forms\\CadastrarUsuarioForm.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAiwEQAAAB5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T22:48:47.826Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CadastrarUsuarioForm.cs [Design]",
-              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
-              "RelativeDocumentMoniker": "Forms\\CadastrarUsuarioForm.cs",
-              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs [Design]",
-              "RelativeToolTip": "Forms\\CadastrarUsuarioForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T00:10:01.322Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DatabasePostgresConnection.cs",
-              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\utils\\DatabasePostgresConnection.cs",
-              "RelativeDocumentMoniker": "utils\\DatabasePostgresConnection.cs",
-              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\utils\\DatabasePostgresConnection.cs",
-              "RelativeToolTip": "utils\\DatabasePostgresConnection.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAUwDEAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T23:48:59.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "Forms\\LoginForm.cs",
               "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\LoginForm.cs",
               "RelativeToolTip": "Forms\\LoginForm.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAvwDAAAAAUAAAA",
+              "ViewState": "AQIAACMAAAAAAAAAAAAqwBYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T22:48:46.155Z",
+              "WhenOpened": "2024-06-20T11:29:03.093Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "LoginForm.cs [Design]",
               "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\LoginForm.cs",
               "RelativeDocumentMoniker": "Forms\\LoginForm.cs",
               "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\LoginForm.cs [Design]",
               "RelativeToolTip": "Forms\\LoginForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T18:51:27.727Z",
+              "WhenOpened": "2024-06-20T11:29:01.865Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "Forms\\MainForm.cs",
+              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\MainForm.cs",
+              "RelativeToolTip": "Forms\\MainForm.cs",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAAwG4AAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T11:23:56.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CadastrarUsuarioForm.cs",
+              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
+              "RelativeDocumentMoniker": "Forms\\CadastrarUsuarioForm.cs",
+              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
+              "RelativeToolTip": "Forms\\CadastrarUsuarioForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAO8AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T11:11:44.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CadastrarUsuarioForm.cs [Design]",
+              "DocumentMoniker": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs",
+              "RelativeDocumentMoniker": "Forms\\CadastrarUsuarioForm.cs",
+              "ToolTip": "C:\\Projetos\\BD2_2024_Vendas\\BD2_2024\\Forms\\CadastrarUsuarioForm.cs [Design]",
+              "RelativeToolTip": "Forms\\CadastrarUsuarioForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T11:11:42.741Z",
               "EditorCaption": " [Design]"
             }
           ]
