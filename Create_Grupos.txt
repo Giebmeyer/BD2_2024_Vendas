@@ -1,13 +1,28 @@
+-- Cria o papel para administradores
+CREATE ROLE grupo_administradores;
+
+-- Cria o papel para funcionários
 CREATE ROLE grupo_funcionarios;
 
-GRANT CONNECT ON DATABASE "mySales" TO grupo_funcionarios;
-GRANT USAGE ON SCHEMA public TO grupo_funcionarios;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grupo_funcionarios;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO grupo_funcionarios;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO grupo_funcionarios;
+--#####################################################
 
-REVOKE ALL PRIVILEGES ON TABLE tb_vendas FROM grupo_funcionarios;
+-- Concede todas as permissões em todas as tabelas no esquema público, exceto a de gerenciar usuários
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO grupo_administradores;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO grupo_administradores;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO grupo_administradores;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO grupo_funcionarios;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO grupo_funcionarios;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO grupo_funcionarios;
+-- Opcional: Concede permissão para criar objetos no esquema público
+GRANT CREATE ON SCHEMA public TO grupo_administradores;
+
+-- Permissões no banco de dados
+GRANT CONNECT ON DATABASE meu_banco TO grupo_administradores;
+
+--#####################################################
+
+---- Concede todas as permissões em todas as tabelas no esquema público, exceto a de gerenciar usuários
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO grupo_funcionarios;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO grupo_funcionarios;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO grupo_funcionarios;
+
+-- Permissões no banco de dados
+GRANT CONNECT ON DATABASE meu_banco TO grupo_funcionarios;

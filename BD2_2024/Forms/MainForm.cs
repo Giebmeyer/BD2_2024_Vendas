@@ -3,9 +3,8 @@ using PostgresConnectionExample;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BD2_2024.Forms
@@ -15,6 +14,7 @@ namespace BD2_2024.Forms
         private List<string> selectedProducts;
         private double totalValue;
         private int totalQuantity;
+        private int salesCounter;
 
         public MainForm()
         {
@@ -22,6 +22,7 @@ namespace BD2_2024.Forms
             selectedProducts = new List<string>();
             totalValue = 0.0;
             totalQuantity = 0;
+            salesCounter = 0;
         }
 
         private void showMessageBox(String txt, String title = "Atenção!")
@@ -55,7 +56,6 @@ namespace BD2_2024.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            hideNewVenda();
 
                 listProducts();
                 CheckUserGroupAndDisableButton();
@@ -91,8 +91,6 @@ namespace BD2_2024.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            hideNewVenda();
-
             Form cadastrarUsuarioForm = new CadastrarUsuarioForm();
             cadastrarUsuarioForm.Show();
         }
@@ -251,11 +249,11 @@ namespace BD2_2024.Forms
         {
             if (totalQuantity.ToString().Length > 0)
             {
-                btnRegistraVenda.Enabled = true;
+               // btnRegistraVenda.Enabled = true;
             }
             else
             {
-                btnRegistraVenda.Enabled = false;
+              //  btnRegistraVenda.Enabled = false;
             }
             lblQtdeProdutos_valor.Text = totalQuantity.ToString();
         }
@@ -315,9 +313,21 @@ namespace BD2_2024.Forms
                         }
                         else
                         {
-                            // throw new Exception($"Produto com código {proCodigo} não encontrado.");
-                            // transaction.Rollback();
+                            //throw new Exception($"Produto com código {proCodigo} não encontrado.");
                         }
+                    }
+
+                    salesCounter++;
+
+                    if (salesCounter % 3 == 0)
+                    {
+                       // RealizarBackup();
+                    }
+
+                    if (dataGridProdutosSelecionados.Rows.Count <= 1)
+                    {
+                        transaction.Rollback();
+                        throw new Exception($"Venda sem produtos...");
                     }
 
                     transaction.Commit();
@@ -357,6 +367,7 @@ namespace BD2_2024.Forms
             }
         }
 
+     
         private void UncheckAllProductCheckboxes()
         {
             foreach (DataGridViewRow row in dataGridProdutos.Rows)
@@ -376,7 +387,12 @@ namespace BD2_2024.Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            hideNewVenda();
+            this.Hide();
+
+            DatabasePostgresConnection.GetInstance().CloseConnection();
+
+            Form loginForm = new Login();
+            loginForm.Show();
         }
     }
 }
