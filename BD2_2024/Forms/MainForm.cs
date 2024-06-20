@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using BD2_2024.models;
+using Npgsql;
 using PostgresConnectionExample;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace BD2_2024.Forms
         public MainForm()
         {
             InitializeComponent();
+            buildMainForm();
             selectedProducts = new List<string>();
             totalValue = 0.0;
             totalQuantity = 0;
@@ -383,16 +385,32 @@ namespace BD2_2024.Forms
         private void BtnNovaVenda_Click(object sender, EventArgs e)
         {
             showNewVenda();
+            listViewProducts.Enabled = false;
+            lblTitulo.Text = "Adicionar venda";
+            listViewProducts.Visible = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
+            hideNewVenda();
+            listViewProducts.Enabled = false;
+            listViewProducts.Visible = false;
+            lblTitulo.Text = "Editar permissões de usuários";
 
-            DatabasePostgresConnection.GetInstance().CloseConnection();
+        }
 
-            Form loginForm = new Login();
-            loginForm.Show();
+        private void buildMainForm()
+        {
+            lblTitulo.Text = "Produtos";
+            Products products = new Products();
+            products.listProductsInMain(listViewProducts);
+            listViewProducts.Visible = true;
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            buildMainForm();
+            hideNewVenda();
         }
     }
 }
