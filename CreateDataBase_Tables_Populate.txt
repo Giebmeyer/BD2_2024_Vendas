@@ -1,3 +1,7 @@
+CREATE DATABASE mySales;
+
+USE mySales;
+
 CREATE TABLE tb_funcionarios (
     fun_codigo BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     fun_nome VARCHAR(45) NOT NULL,
@@ -39,3 +43,21 @@ CREATE TABLE tb_vendas_itens (
 );
 
 
+
+
+
+INSERT INTO tb_fornecedores (for_descricao) VALUES ('Fornecedor ABC');
+INSERT INTO tb_fornecedores (for_descricao) VALUES ('Distribuidora XYZ');
+INSERT INTO tb_fornecedores (for_descricao) VALUES ('Suprimentos LMN');
+
+INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_fun_codigo) VALUES
+('Caneta Esferográfica', 1.50, 500, 1),
+('Lápis HB', 0.75, 1000, 1),
+('Caderno 200 Folhas', 15.00, 300, 1),
+('Mouse Óptico', 25.00, 150, 2),
+('Teclado Mecânico', 150.00, 50, 2),
+('Monitor LED 24"', 800.00, 30, 2),
+('Papel A4 500 Folhas', 20.00, 400, 3),
+('Toner para Impressora', 250.00, 70, 3),
+('Cadeira Ergonômica', 600.00, 20, 3),
+('Mesa para Escritório', 1200.00, 10, 3);

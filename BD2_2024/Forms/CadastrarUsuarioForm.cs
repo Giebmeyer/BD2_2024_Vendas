@@ -37,15 +37,25 @@ namespace BD2_2024.Forms
                 using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
                 {
                     string checkAdminSql = @"
-                    SELECT EXISTS (
+                SELECT 
+                    EXISTS (
                         SELECT 1
                         FROM pg_roles
-                        WHERE pg_has_role(current_user, oid, 'member')
-                        AND rolname = 'grupo_administradores')";
+                        WHERE pg_has_role(current_user::regrole, oid, 'member')
+                        AND rolname = 'grupo_administradores'
+                    )
+                    OR
+                    (
+                        SELECT rolsuper FROM pg_roles WHERE rolname = current_user
+                    ) AS is_admin";
 
                     using (NpgsqlCommand checkAdminCmd = new NpgsqlCommand(checkAdminSql, connection))
                     {
-                        isAdmin = (bool)checkAdminCmd.ExecuteScalar();
+                        object result = checkAdminCmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            isAdmin = Convert.ToBoolean(result);
+                        }
                     }
                 }
             }
@@ -55,13 +65,14 @@ namespace BD2_2024.Forms
             }
         }
 
+
         private void LoadGroups()
         {
             try
             {
                 using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
                 {
-                    string loadGroupsSql = "SELECT DISTINCT rolname FROM pg_roles WHERE rolcanlogin = false AND rolname LIKE 'grupo_%'";
+                    string loadGroupsSql = "SELECT DISTINCT rolname FROM pg_roles WHERE rolname LIKE 'grupo_%'";
 
                     using (NpgsqlCommand loadGroupsCmd = new NpgsqlCommand(loadGroupsSql, connection))
                     {
@@ -71,12 +82,17 @@ namespace BD2_2024.Forms
                             {
                                 string groupName = reader.GetString(0);
 
-                                if (groupName == "grupo_administradores")
+                                if (groupName == "grupo_administradores" && !isAdmin)
                                 {
                                     continue;
                                 }
 
-                                comboGrupos.Items.Add(groupName);
+                                if (!comboGrupos.Items.Contains(groupName))
+                                {
+                                    comboGrupos.Items.Add(groupName);
+
+                                }
+
                             }
                         }
                     }
@@ -96,7 +112,7 @@ namespace BD2_2024.Forms
                 {
                     string loadUsersSql = @"
                     SELECT u.usename AS Usuario, r.rolname AS Grupo,
-                           has_table_privilege(u.usename, 'tb_funcionarios', 'UPDATE') AS PodeCadastrarFuncionarios
+                           has_table_privilege(u.usename, 'tb_produtos', 'INSERT') AS PodeCadastrarProduto
                     FROM pg_user u
                     LEFT JOIN pg_auth_members m ON u.usesysid = m.member
                     LEFT JOIN pg_roles r ON m.roleid = r.oid
@@ -131,9 +147,9 @@ namespace BD2_2024.Forms
                             {
                                 DataGridViewCheckBoxColumn checkboxColumn = new DataGridViewCheckBoxColumn
                                 {
-                                    DataPropertyName = "PodeCadastrarFuncionarios",
-                                    HeaderText = "Pode Cadastrar Funcionários",
-                                    Name = "PodeCadastrarFuncionarios"
+                                    DataPropertyName = "PodeCadastrarProduto",
+                                    HeaderText = "Pode cadastrar produtos",
+                                    Name = "PodeCadastrarProduto"
                                 };
                                 gridUsuarios.Columns.Add(checkboxColumn);
                             }
@@ -156,10 +172,10 @@ namespace BD2_2024.Forms
 
         private void gridUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == gridUsuarios.Columns["PodeCadastrarFuncionarios"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == gridUsuarios.Columns["PodeCadastrarProduto"].Index)
             {
                 string usuario = gridUsuarios.Rows[e.RowIndex].Cells["Usuario"].Value.ToString();
-                bool podeInserir = (bool)gridUsuarios.Rows[e.RowIndex].Cells["PodeCadastrarFuncionarios"].EditedFormattedValue;
+                bool podeInserir = (bool)gridUsuarios.Rows[e.RowIndex].Cells["PodeCadastrarProduto"].EditedFormattedValue;
 
                 try
                 {
@@ -169,11 +185,11 @@ namespace BD2_2024.Forms
 
                         if (podeInserir)
                         {
-                            sql = $"REVOKE UPDATE ON tb_funcionarios FROM {usuario}";
+                            sql = $"REVOKE INSERT ON tb_produtos FROM {usuario}";
                         }
                         else
                         {
-                            sql = $"GRANT UPDATE ON tb_funcionarios TO {usuario}";
+                            sql = $"GRANT INSERT ON tb_produtos TO {usuario}";
                         }
 
                         using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
@@ -207,22 +223,7 @@ namespace BD2_2024.Forms
             {
                 using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
                 {
-                    string sql = $"CREATE USER {usuario} WITH PASSWORD '{senha}'";
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    if (grupoSelecionado == "grupo_funcionarios")
-                    {
-                        sql = $"REVOKE INSERT ON tb_produtos FROM {usuario}";
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-
-                    sql = $"GRANT {grupoSelecionado} TO {usuario}";
+                    string sql = $"CREATE ROLE {usuario} LOGIN PASSWORD '{senha}' IN ROLE {grupoSelecionado}";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
                     {
                         cmd.ExecuteNonQuery();

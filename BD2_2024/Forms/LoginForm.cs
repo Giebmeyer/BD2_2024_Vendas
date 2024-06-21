@@ -20,6 +20,8 @@ namespace BD2_2024
 
         private void Login_Load(object sender, EventArgs e)
         {
+            //BackupUtility backupUtility = new BackupUtility();
+            //backupUtility.RealizarBackup();
 
         }
 
