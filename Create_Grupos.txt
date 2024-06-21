@@ -1,15 +1,13 @@
 CREATE ROLE grupo_funcionarios;
 
-GRANT USAGE ON SCHEMA public TO grupo_funcionarios;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO grupo_funcionarios;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grupo_funcionarios;
+REVOKE INSERT ON TABLE tb_produtos FROM grupo_funcionarios;
+REVOKE ALL ON TABLE tb_funcionarios FROM grupo_funcionarios;
 
-REVOKE UPDATE ON tb_funcionarios FROM grupo_funcionarios;
-REVOKE CREATE ON tb_produtos FROM grupo_funcionarios;
+--#####################################
 
-ALTER ROLE grupo_funcionarios WITH CREATEROLE;
---##########################################################
 
-CREATE ROLE grupo_administradores;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grupo_administradores;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO grupo_administradores;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO grupo_administradores;
+CREATE ROLE grupo_adminitradores;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grupo_adminitradores;
+REVOKE ALL ON TABLE tb_funcionarios FROM grupo_adminitradores;

@@ -7,6 +7,10 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace BD2_2024.Forms
 {
@@ -60,9 +64,32 @@ namespace BD2_2024.Forms
         {
 
                 lblTitulo.Text = "Adicionar venda";
+                hideNewProduct();
                 listProducts();
                 CheckUserGroupAndDisableButton();
             
+        }
+
+        private void hideNewProduct()
+        {
+            btnCadastrar.Visible = false;
+            lblDesc.Visible = false;
+            lblEstoque.Visible = false;
+            label2.Visible = false;
+            txtDescricao.Visible = false;
+            txtEstoque.Visible = false;
+            txtPreco.Visible = false;
+        }
+
+        private void showNewProduct()
+        {
+            btnCadastrar.Visible = true;
+            lblDesc.Visible = true;
+            lblEstoque.Visible = true;
+            label2.Visible = true;
+            txtDescricao.Visible = true;
+            txtEstoque.Visible = true;
+            txtPreco.Visible = true;
         }
 
         private void CheckUserGroupAndDisableButton()
@@ -71,7 +98,7 @@ namespace BD2_2024.Forms
             {
                 try
                 {
-                    string query = "SELECT has_table_privilege(current_user, 'tb_funcionarios', 'UPDATE') AS can_update";
+                    string query = "SELECT has_table_privilege(current_user, 'tb_produtos', 'INSERT') AS podeCriarProduto";
 
                     using (var command = new NpgsqlCommand(query, connection))
                     {
@@ -80,8 +107,23 @@ namespace BD2_2024.Forms
                             if (reader.Read())
                             {
                                 bool canInsertProducts = reader.GetBoolean(0);
+                                //Estoura erro na tela de remover!!!
+                                //BtnNovoProduto.Enabled = canInsertProducts;
+                            }
+                        }
+                    }
 
-                                BtnCdstFuncionario.Enabled = canInsertProducts;
+                    query = "SELECT has_table_privilege(current_user, 'tb_funcionarios', 'INSERT') AS podeCriarFuncionarios";
+
+                    using (var command = new NpgsqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                bool podeCriarFuncionarios = reader.GetBoolean(0);
+
+                                BtnCdstFuncionario.Enabled = podeCriarFuncionarios;
                             }
                         }
                     }
@@ -322,7 +364,7 @@ namespace BD2_2024.Forms
 
                     if (salesCounter % 3 == 0)
                     {
-                       // RealizarBackup();
+                       RealizarBackup();
                     }
 
                     if (dataGridProdutosSelecionados.Rows.Count <= 1) // Validação para "forçar" o Rollback
@@ -367,8 +409,42 @@ namespace BD2_2024.Forms
                 }
             }
         }
+        private void RealizarBackup()
+        {
+            string pgDumpPath = @"C:\Program Files\PostgreSQL\16\pgAdmin 4\runtime\pg_dump.exe";
+            string filePath = @"C:\Users\DEV-TH~1\Desktop\teste.sql";
+            string host = "127.0.0.1";
+            string port = "5432";
+            string username = "postgres";
+            string password = "root"; 
+            string database = "mySales";
+            string schema = "public";
 
-     
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = pgDumpPath,
+                Arguments = $"--file \"{filePath}\" --host \"{host}\" --port \"{port}\" --username \"{username}\" --no-password --format=c --large-objects --verbose --schema \"{schema}\" \"{database}\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = false
+            };
+
+            startInfo.EnvironmentVariables["PGPASSWORD"] = password;
+
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.OutputDataReceived += (sender, e) => Console.WriteLine(e.Data);
+                process.ErrorDataReceived += (sender, e) => Console.WriteLine("ERROR: " + e.Data);
+
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit();
+            }
+        }
+
+
         private void UncheckAllProductCheckboxes()
         {
             foreach (DataGridViewRow row in dataGridProdutos.Rows)
@@ -385,6 +461,7 @@ namespace BD2_2024.Forms
         {
             showNewVenda();
             lblTitulo.Text = "Adicionar venda";
+            showNewProduct();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -416,5 +493,53 @@ namespace BD2_2024.Forms
         {
 
         }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+            {
+                string descricao = txtDescricao.Text;
+                decimal estoque;
+                decimal preco;
+
+            if (!decimal.TryParse(txtPreco.Text, out preco))
+            {
+                MessageBox.Show("Preço inválido. Certifique-se de digitar um valor numérico.");
+                return;
+            }
+
+            if (!decimal.TryParse(txtEstoque.Text, out estoque))
+            {
+                MessageBox.Show("Estoque inválido. Certifique-se de digitar um valor numérico.");
+                return;
+            }
+
+            try
+                {
+                    using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
+                    {
+                    string sql = @"
+                                INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_fun_codigo)
+                                VALUES (@descricao, @preco, @estoque, 1);";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@descricao", descricao);
+                            cmd.Parameters.AddWithValue("@preco", preco);
+                            cmd.Parameters.AddWithValue("@estoque", estoque);
+                        cmd.ExecuteNonQuery();
+                        }
+
+                       MessageBox.Show("Produto cadastrado com sucesso!");
+                    listProducts();
+                    hideNewProduct();
+                    txtDescricao.Clear();
+                      txtPreco.Clear();
+                    txtEstoque.Clear();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao cadastrar produto: {ex.Message}");
+                }
+            }
     }
 }

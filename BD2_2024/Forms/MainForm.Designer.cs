@@ -30,8 +30,8 @@ namespace BD2_2024.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnCdstFuncionario = new System.Windows.Forms.Button();
             this.BtnNovoProduto = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -46,25 +46,30 @@ namespace BD2_2024.Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.dataGridProdutos = new System.Windows.Forms.DataGridView();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
+            this.txtPreco = new System.Windows.Forms.TextBox();
+            this.txtEstoque = new System.Windows.Forms.TextBox();
+            this.lblDesc = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblEstoque = new System.Windows.Forms.Label();
+            this.btnCadastrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProdutosSelecionados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProdutos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnCdstFuncionario
             // 
-            this.BtnCdstFuncionario.BackColor = System.Drawing.Color.LightCyan;
+            this.BtnCdstFuncionario.BackColor = System.Drawing.Color.PowderBlue;
             this.BtnCdstFuncionario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCdstFuncionario.FlatAppearance.BorderSize = 0;
             this.BtnCdstFuncionario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCdstFuncionario.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.BtnCdstFuncionario.ForeColor = System.Drawing.Color.CadetBlue;
-            this.BtnCdstFuncionario.Location = new System.Drawing.Point(14, 79);
+            this.BtnCdstFuncionario.Location = new System.Drawing.Point(14, 12);
             this.BtnCdstFuncionario.Margin = new System.Windows.Forms.Padding(4);
             this.BtnCdstFuncionario.Name = "BtnCdstFuncionario";
             this.BtnCdstFuncionario.Padding = new System.Windows.Forms.Padding(10);
@@ -77,14 +82,14 @@ namespace BD2_2024.Forms
             // 
             // BtnNovoProduto
             // 
-            this.BtnNovoProduto.BackColor = System.Drawing.Color.LightCyan;
+            this.BtnNovoProduto.BackColor = System.Drawing.Color.PowderBlue;
             this.BtnNovoProduto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnNovoProduto.FlatAppearance.BorderSize = 0;
             this.BtnNovoProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnNovoProduto.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnNovoProduto.ForeColor = System.Drawing.Color.CadetBlue;
             this.BtnNovoProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnNovoProduto.Location = new System.Drawing.Point(13, 196);
+            this.BtnNovoProduto.Location = new System.Drawing.Point(14, 82);
             this.BtnNovoProduto.Margin = new System.Windows.Forms.Padding(4);
             this.BtnNovoProduto.Name = "BtnNovoProduto";
             this.BtnNovoProduto.Size = new System.Drawing.Size(238, 62);
@@ -96,20 +101,20 @@ namespace BD2_2024.Forms
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.LightCyan;
+            this.pictureBox1.BackColor = System.Drawing.Color.PowderBlue;
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(195, 206);
+            this.pictureBox1.Location = new System.Drawing.Point(196, 92);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.Size = new System.Drawing.Size(45, 44);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // dataGridProdutosSelecionados
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.dataGridProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.dataGridProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridProdutosSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridProdutosSelecionados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -190,12 +195,12 @@ namespace BD2_2024.Forms
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.LightCyan;
+            this.pictureBox2.BackColor = System.Drawing.Color.PowderBlue;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(196, 89);
+            this.pictureBox2.Location = new System.Drawing.Point(196, 25);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox2.Size = new System.Drawing.Size(45, 37);
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
             // 
@@ -237,8 +242,8 @@ namespace BD2_2024.Forms
             // 
             // dataGridProdutos
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.dataGridProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.dataGridProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridProdutos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridProdutos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -246,27 +251,80 @@ namespace BD2_2024.Forms
             this.dataGridProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridProdutos.Location = new System.Drawing.Point(259, 79);
             this.dataGridProdutos.Name = "dataGridProdutos";
-            this.dataGridProdutos.Size = new System.Drawing.Size(444, 480);
+            this.dataGridProdutos.Size = new System.Drawing.Size(400, 480);
             this.dataGridProdutos.TabIndex = 15;
             // 
-            // pictureBox3
+            // txtDescricao
             // 
-            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 290);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(226, 351);
-            this.pictureBox3.TabIndex = 11;
-            this.pictureBox3.TabStop = false;
+            this.txtDescricao.Location = new System.Drawing.Point(14, 210);
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.Size = new System.Drawing.Size(238, 24);
+            this.txtDescricao.TabIndex = 16;
+            // 
+            // txtPreco
+            // 
+            this.txtPreco.Location = new System.Drawing.Point(12, 256);
+            this.txtPreco.Name = "txtPreco";
+            this.txtPreco.Size = new System.Drawing.Size(100, 24);
+            this.txtPreco.TabIndex = 17;
+            // 
+            // txtEstoque
+            // 
+            this.txtEstoque.Location = new System.Drawing.Point(152, 256);
+            this.txtEstoque.Name = "txtEstoque";
+            this.txtEstoque.Size = new System.Drawing.Size(100, 24);
+            this.txtEstoque.TabIndex = 18;
+            // 
+            // lblDesc
+            // 
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Location = new System.Drawing.Point(12, 190);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(67, 17);
+            this.lblDesc.TabIndex = 19;
+            this.lblDesc.Text = "Descrição";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 237);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 17);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Preço";
+            // 
+            // lblEstoque
+            // 
+            this.lblEstoque.AutoSize = true;
+            this.lblEstoque.Location = new System.Drawing.Point(149, 237);
+            this.lblEstoque.Name = "lblEstoque";
+            this.lblEstoque.Size = new System.Drawing.Size(58, 17);
+            this.lblEstoque.TabIndex = 21;
+            this.lblEstoque.Text = "Estoque";
+            // 
+            // btnCadastrar
+            // 
+            this.btnCadastrar.Location = new System.Drawing.Point(12, 295);
+            this.btnCadastrar.Name = "btnCadastrar";
+            this.btnCadastrar.Size = new System.Drawing.Size(240, 23);
+            this.btnCadastrar.TabIndex = 11;
+            this.btnCadastrar.Text = "Cadastrar";
+            this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1119, 653);
-            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.btnCadastrar);
+            this.Controls.Add(this.lblEstoque);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblDesc);
+            this.Controls.Add(this.txtEstoque);
+            this.Controls.Add(this.txtPreco);
+            this.Controls.Add(this.txtDescricao);
             this.Controls.Add(this.dataGridProdutos);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -290,8 +348,8 @@ namespace BD2_2024.Forms
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProdutos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -311,6 +369,12 @@ namespace BD2_2024.Forms
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridView dataGridProdutos;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.TextBox txtDescricao;
+        private System.Windows.Forms.TextBox txtPreco;
+        private System.Windows.Forms.TextBox txtEstoque;
+        private System.Windows.Forms.Label lblDesc;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEstoque;
+        private System.Windows.Forms.Button btnCadastrar;
     }
 }
