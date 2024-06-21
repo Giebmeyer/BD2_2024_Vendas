@@ -92,6 +92,48 @@ namespace BD2_2024.Forms
             //  txtPreco.Visible = true;
         }
 
+        private void AddProductToSelectedGrid(int rowIndex)
+        {
+            DataGridViewRow selectedRow = dataGridProdutos.Rows[rowIndex];
+            string productCode = selectedRow.Cells["Código"].Value.ToString();
+
+            var existingRow = dataGridProdutosSelecionados.Rows
+                .Cast<DataGridViewRow>()
+                .FirstOrDefault(row => row.Cells["Código"].Value != null && row.Cells["Código"].Value.ToString() == productCode);
+
+            if (existingRow != null)
+            {
+                if (existingRow.Cells["Quantidade"].Value == null || existingRow.Cells["Quantidade"].Value == DBNull.Value)
+                {
+                    existingRow.Cells["Quantidade"].Value = 1;
+                }
+                else
+                {
+                    int currentQuantity;
+                    if (int.TryParse(existingRow.Cells["Quantidade"].Value.ToString(), out currentQuantity))
+                    {
+                        existingRow.Cells["Quantidade"].Value = currentQuantity + 1;
+                    }
+                    else
+                    {
+                        throw new InvalidCastException("Valor da quantidade não é um número válido.");
+                    }
+                }
+            }
+            else
+            {
+                string[] row = {
+            selectedRow.Cells["Código"].Value.ToString(),
+            selectedRow.Cells["Descrição"].Value.ToString(),
+            selectedRow.Cells["Valor"].Value.ToString(),
+            "1", 
+            selectedRow.Cells["Estoque"].Value.ToString()
+        };
+
+                dataGridProdutosSelecionados.Rows.Add(row);
+            }
+        }
+
         private void CheckUserGroupAndDisableButton()
         {
             using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
@@ -155,7 +197,7 @@ namespace BD2_2024.Forms
 
             using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
             {
-                using (var command = new NpgsqlCommand("SELECT * FROM tb_produtos;", connection))
+                using (var command = new NpgsqlCommand("SELECT * FROM tb_produtos ORDER BY pro_codigo ASC;", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -199,7 +241,6 @@ namespace BD2_2024.Forms
 
                 if (isChecked)
                 {
-                    selectedProducts.Add(productCode);
                     AddProductToSelectedGrid(e.RowIndex);
                     totalValue += productValue;
                     totalQuantity++;
@@ -212,15 +253,7 @@ namespace BD2_2024.Forms
 
                     if (existingRow != null)
                     {
-                        int currentQuantity;
-                        if (existingRow.Cells["Quantidade"].Value != null)
-                        {
-                            currentQuantity = Convert.ToInt32(existingRow.Cells["Quantidade"].Value);
-                        }
-                        else
-                        {
-                            currentQuantity = 1;
-                        }
+                        int currentQuantity = Convert.ToInt32(existingRow.Cells["Quantidade"].Value);
 
                         if (currentQuantity > 1)
                         {
@@ -230,8 +263,7 @@ namespace BD2_2024.Forms
                         }
                         else
                         {
-                            selectedProducts.Remove(productCode);
-                            RemoveProductFromSelectedGrid(productCode);
+                            dataGridProdutosSelecionados.Rows.Remove(existingRow);
                             totalValue -= productValue;
                             totalQuantity--;
                         }
@@ -243,19 +275,6 @@ namespace BD2_2024.Forms
             }
         }
 
-        private void AddProductToSelectedGrid(int rowIndex)
-        {
-            DataGridViewRow selectedRow = dataGridProdutos.Rows[rowIndex];
-            string[] row = {
-                selectedRow.Cells["Código"].Value.ToString(),
-                selectedRow.Cells["Descrição"].Value.ToString(),
-                selectedRow.Cells["Valor"].Value.ToString(),
-                "1", // Quantidade inicial padrão 
-                selectedRow.Cells["Estoque"].Value.ToString()
-            };
-
-            dataGridProdutosSelecionados.Rows.Add(row);
-        }
 
         private void RemoveProductFromSelectedGrid(string productCode)
         {
@@ -376,7 +395,8 @@ namespace BD2_2024.Forms
 
                     if (salesCounter % 3 == 0)
                     {
-                       RealizarBackup();
+                        //BackupUtility backupUtility = new BackupUtility();
+                        //backupUtility.RealizarBackup();
                     }
 
                     if (dataGridProdutosSelecionados.Rows.Count <= 1) // Validação para "forçar" o Rollback
@@ -422,42 +442,6 @@ namespace BD2_2024.Forms
                 }
             }
         }
-        private void RealizarBackup()
-        {
-            string pgDumpPath = @"C:\Program Files\PostgreSQL\16\pgAdmin 4\runtime\pg_dump.exe";
-            string filePath = @"C:\Users\DEV-TH~1\Desktop\teste.sql";
-            string host = "127.0.0.1";
-            string port = "5432";
-            string username = "postgres";
-            string password = "root"; 
-            string database = "mySales";
-            string schema = "public";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = pgDumpPath,
-                Arguments = $"--file \"{filePath}\" --host \"{host}\" --port \"{port}\" --username \"{username}\" --no-password --format=c --large-objects --verbose --schema \"{schema}\" \"{database}\"",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = false
-            };
-
-            startInfo.EnvironmentVariables["PGPASSWORD"] = password;
-
-            using (Process process = new Process { StartInfo = startInfo })
-            {
-                process.OutputDataReceived += (sender, e) => Console.WriteLine(e.Data);
-                process.ErrorDataReceived += (sender, e) => Console.WriteLine("ERROR: " + e.Data);
-
-                process.Start();
-                process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
-                process.WaitForExit();
-            }
-        }
-
-
         private void UncheckAllProductCheckboxes()
         {
             foreach (DataGridViewRow row in dataGridProdutos.Rows)

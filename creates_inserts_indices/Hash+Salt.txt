@@ -1,0 +1,68 @@
+--------COM HASH+SALT-----------
+-- Criar a tabela
+CREATE TABLE tb_funcionarios (
+    fun_codigo BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    fun_nome VARCHAR(45) NOT NULL,
+    fun_cpf VARCHAR(45) NOT NULL,
+    fun_senha VARCHAR(60) NOT NULL,
+    fun_funcao VARCHAR(50) NOT NULL
+);
+
+-- Adicionar coluna para armazenar o salt
+ALTER TABLE tb_funcionarios
+ADD COLUMN fun_salt VARCHAR(40);
+
+-- Instalar extensão pgcrypto
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- Função para gerar o salt
+CREATE OR REPLACE FUNCTION generate_salt()
+RETURNS TEXT AS $$
+BEGIN
+    RETURN encode(gen_random_bytes(16), 'hex');
+END;
+$$ LANGUAGE plpgsql;
+
+-- Função para gerar o hash da senha usando o salt
+CREATE OR REPLACE FUNCTION hash_password(password TEXT, salt TEXT)
+RETURNS TEXT AS $$
+BEGIN
+    RETURN crypt(password, gen_salt('bf', 8) || salt);
+END;
+$$ LANGUAGE plpgsql;
+
+-- Função para criptografar a senha antes de inserir ou atualizar
+CREATE OR REPLACE FUNCTION encrypt_password()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.fun_senha IS NOT NULL THEN
+        NEW.fun_salt := generate_salt();
+        NEW.fun_senha := hash_password(NEW.fun_senha, NEW.fun_salt);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger para criptografar a senha antes de inserir ou atualizar
+
+CREATE TRIGGER before_insert_update_tb_funcionarios
+BEFORE INSERT OR UPDATE ON tb_funcionarios
+FOR EACH ROW
+EXECUTE FUNCTION encrypt_password();
+
+-- Função para atualizar as senhas existentes
+CREATE OR REPLACE FUNCTION update_existing_passwords()
+RETURNS VOID AS $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN SELECT fun_codigo, fun_senha FROM tb_funcionarios LOOP
+        UPDATE tb_funcionarios
+        SET fun_salt = generate_salt(),
+            fun_senha = hash_password(rec.fun_senha, generate_salt())
+        WHERE fun_codigo = rec.fun_codigo;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT update_existing_passwords();

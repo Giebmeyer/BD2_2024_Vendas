@@ -1,0 +1,12 @@
+INSERT INTO tb_fornecedores (for_descricao)
+VALUES
+  ('Distribuidora de Produtos de Limpeza'),
+  ('Distribuidora de Pescados'),
+  ('Distribuidora de Carnes'),
+  ('Distribuidora de panificação e confeitaria'),
+  ('Distribuidora de Higiene e Saúde'),
+  ('Distribuidora de Frutas e Verduras'),
+  ('Distribuidora de Bebidas'),
+  ('Distribuidora de Enlatados'),
+  ('Distribuidora de Frios e laticínios'),
+  ('Distribuidora de Cereais integrais');

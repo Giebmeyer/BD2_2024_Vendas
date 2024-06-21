@@ -1,0 +1,22 @@
+INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_fun_codigo)
+VALUES
+  ('Detergente Líquido', 5.99, 1000, 1),
+  ('Água Sanitária', 3.50, 2000, 1),
+  ('Filé de Salmão', 45.00, 5000, 2),
+  ('Camarão Congelado', 60.00, 3000, 2),
+  ('Carne Bovina', 30.00, 1500, 3),
+  ('Carne Suína', 25.00, 1000, 3),
+  ('Farinha de Trigo', 4.00, 3000, 4),
+  ('Fermento Biológico', 2.50, 4000, 4),
+  ('Sabonete Líquido', 6.00, 2500, 5),
+  ('Papel Higiênico', 2.00, 5000, 5),
+  ('Maçã', 3.00, 1500, 6),
+  ('Banana', 2.00, 2000, 6),
+  ('Refrigerante', 4.50, 3500, 7),
+  ('Cerveja', 6.00, 4000, 7),
+  ('Milho em Conserva', 3.20, 2500, 8),
+  ('Ervilha em Conserva', 3.00, 3000, 8),
+  ('Queijo', 20.00, 1000, 9),
+  ('Presunto', 18.00, 1200, 9),
+  ('Aveia', 5.00, 2000, 10),
+  ('Arroz Integral', 7.00, 1500, 10);
