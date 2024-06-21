@@ -183,6 +183,7 @@ namespace BD2_2024.Forms
             dataGridProdutosSelecionados.Columns.Add("Descrição", "Descrição");
             dataGridProdutosSelecionados.Columns.Add("Valor", "Valor");
             dataGridProdutosSelecionados.Columns.Add("Quantidade", "Quantidade");
+            dataGridProdutosSelecionados.Columns.Add("Estoque", "Estoque");
 
         }
 
@@ -249,7 +250,8 @@ namespace BD2_2024.Forms
                 selectedRow.Cells["Código"].Value.ToString(),
                 selectedRow.Cells["Descrição"].Value.ToString(),
                 selectedRow.Cells["Valor"].Value.ToString(),
-                "1" // Quantidade inicial padrão
+                "1", // Quantidade inicial padrão 
+                selectedRow.Cells["Estoque"].Value.ToString()
             };
 
             dataGridProdutosSelecionados.Rows.Add(row);
@@ -321,7 +323,7 @@ namespace BD2_2024.Forms
                         double totalValue = 0.0;
                         foreach (DataGridViewRow row in dataGridProdutosSelecionados.Rows)
                         {
-                            int quantidade = Convert.ToInt32(row.Cells["Quantidade"].Value);
+                            int quantidade = Convert.ToInt32(row.Cells["Quantidade"].Value);                            
                             double valorUnitario = Convert.ToDouble(row.Cells["Valor"].Value);
                             double valorParcial = quantidade * valorUnitario;
                             totalValue += valorParcial;
@@ -337,6 +339,7 @@ namespace BD2_2024.Forms
                         long proCodigo = Convert.ToInt64(row.Cells["Código"].Value);
                         int quantidade = Convert.ToInt32(row.Cells["Quantidade"].Value);
                         double valorUnitario = Convert.ToDouble(row.Cells["Valor"].Value);
+                        int estoque = Convert.ToInt32(row.Cells["Estoque"].Value);
                         double valorParcial = quantidade * valorUnitario;
 
                         bool proCodigoExists;
@@ -356,6 +359,15 @@ namespace BD2_2024.Forms
                                 insertCommand.Parameters.AddWithValue("@pro_codigo", proCodigo);
                                 insertCommand.Parameters.AddWithValue("@ven_codigo", venCodigo);
                                 insertCommand.ExecuteNonQuery();
+                            }
+
+                            using (var updateCommand = new NpgsqlCommand("UPDATE tb_produtos SET pro_quantidade = @pro_qtd WHERE pro_codigo = @pro_cod", connection))
+                            {
+                                int estoqueTotal = estoque - quantidade;
+                                updateCommand.Parameters.AddWithValue("@pro_qtd", estoqueTotal);
+                                updateCommand.Parameters.AddWithValue("@pro_cod", proCodigo);
+                                updateCommand.ExecuteNonQuery();
+                                
                             }
                         }
                     }
@@ -377,6 +389,7 @@ namespace BD2_2024.Forms
 
                     selectedProducts.Clear();
                     dataGridProdutosSelecionados.Rows.Clear();
+                    listProducts();
                     totalValue = 0.0;
                     totalQuantity = 0;
                     UpdateTotalValueLabel();

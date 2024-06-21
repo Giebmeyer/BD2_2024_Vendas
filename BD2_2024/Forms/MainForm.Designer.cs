@@ -30,8 +30,8 @@ namespace BD2_2024.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnCdstFuncionario = new System.Windows.Forms.Button();
             this.BtnNovoProduto = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -64,7 +64,7 @@ namespace BD2_2024.Forms
             this.BtnCdstFuncionario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCdstFuncionario.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.BtnCdstFuncionario.ForeColor = System.Drawing.Color.CadetBlue;
-            this.BtnCdstFuncionario.Location = new System.Drawing.Point(14, 12);
+            this.BtnCdstFuncionario.Location = new System.Drawing.Point(12, 79);
             this.BtnCdstFuncionario.Margin = new System.Windows.Forms.Padding(4);
             this.BtnCdstFuncionario.Name = "BtnCdstFuncionario";
             this.BtnCdstFuncionario.Padding = new System.Windows.Forms.Padding(10);
@@ -84,7 +84,7 @@ namespace BD2_2024.Forms
             this.BtnNovoProduto.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnNovoProduto.ForeColor = System.Drawing.Color.CadetBlue;
             this.BtnNovoProduto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnNovoProduto.Location = new System.Drawing.Point(14, 82);
+            this.BtnNovoProduto.Location = new System.Drawing.Point(12, 196);
             this.BtnNovoProduto.Margin = new System.Windows.Forms.Padding(4);
             this.BtnNovoProduto.Name = "BtnNovoProduto";
             this.BtnNovoProduto.Size = new System.Drawing.Size(238, 62);
@@ -99,17 +99,17 @@ namespace BD2_2024.Forms
             this.pictureBox1.BackColor = System.Drawing.Color.LightCyan;
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(196, 92);
+            this.pictureBox1.Location = new System.Drawing.Point(194, 206);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.Size = new System.Drawing.Size(44, 45);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // dataGridProdutosSelecionados
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.dataGridProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.dataGridProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridProdutosSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridProdutosSelecionados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -193,7 +193,7 @@ namespace BD2_2024.Forms
             this.pictureBox2.BackColor = System.Drawing.Color.LightCyan;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(196, 25);
+            this.pictureBox2.Location = new System.Drawing.Point(194, 92);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(45, 45);
             this.pictureBox2.TabIndex = 11;
@@ -237,8 +237,8 @@ namespace BD2_2024.Forms
             // 
             // dataGridProdutos
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.dataGridProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.dataGridProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridProdutos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridProdutos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -246,7 +246,7 @@ namespace BD2_2024.Forms
             this.dataGridProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridProdutos.Location = new System.Drawing.Point(259, 79);
             this.dataGridProdutos.Name = "dataGridProdutos";
-            this.dataGridProdutos.Size = new System.Drawing.Size(400, 480);
+            this.dataGridProdutos.Size = new System.Drawing.Size(444, 480);
             this.dataGridProdutos.TabIndex = 15;
             // 
             // pictureBox3
