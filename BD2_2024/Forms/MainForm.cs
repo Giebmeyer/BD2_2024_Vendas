@@ -72,24 +72,24 @@ namespace BD2_2024.Forms
 
         private void hideNewProduct()
         {
-            btnCadastrar.Visible = false;
-            lblDesc.Visible = false;
-            lblEstoque.Visible = false;
-            label2.Visible = false;
-            txtDescricao.Visible = false;
-            txtEstoque.Visible = false;
-            txtPreco.Visible = false;
+           // btnCadastrar.Visible = false;
+          //  lblDesc.Visible = false;
+            //lblEstoque.Visible = false;
+            //label2.Visible = false;
+            //txtDescricao.Visible = false;
+            //txtEstoque.Visible = false;
+            //txtPreco.Visible = false;
         }
 
         private void showNewProduct()
         {
-            btnCadastrar.Visible = true;
-            lblDesc.Visible = true;
-            lblEstoque.Visible = true;
-            label2.Visible = true;
-            txtDescricao.Visible = true;
-            txtEstoque.Visible = true;
-            txtPreco.Visible = true;
+            //  btnCadastrar.Visible = true;
+            //  lblDesc.Visible = true;
+            //  lblEstoque.Visible = true;
+            //  label2.Visible = true;
+            //  txtDescricao.Visible = true;
+            //  txtEstoque.Visible = true;
+            //  txtPreco.Visible = true;
         }
 
         private void CheckUserGroupAndDisableButton()
@@ -459,9 +459,12 @@ namespace BD2_2024.Forms
 
         private void BtnNovoProduto_Click(object sender, EventArgs e)
         {
-            showNewVenda();
-            lblTitulo.Text = "Adicionar venda";
-            showNewProduct();
+            this.Hide();
+            Form CadastrarProduto = new CadastrarProduto();
+            CadastrarProduto.Show();
+            // showNewVenda();
+            //lblTitulo.Text = "Adicionar venda";
+            //showNewProduct();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -474,7 +477,7 @@ namespace BD2_2024.Forms
         private void buildMainForm()
         {
             lblTitulo.Text = "Produtos";
-            Products products = new Products();
+            // Products products = new Products();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -494,52 +497,5 @@ namespace BD2_2024.Forms
 
         }
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
-            {
-                string descricao = txtDescricao.Text;
-                decimal estoque;
-                decimal preco;
-
-            if (!decimal.TryParse(txtPreco.Text, out preco))
-            {
-                MessageBox.Show("Preço inválido. Certifique-se de digitar um valor numérico.");
-                return;
-            }
-
-            if (!decimal.TryParse(txtEstoque.Text, out estoque))
-            {
-                MessageBox.Show("Estoque inválido. Certifique-se de digitar um valor numérico.");
-                return;
-            }
-
-            try
-                {
-                    using (var connection = DatabasePostgresConnection.GetInstance().GetConnection())
-                    {
-                    string sql = @"
-                                INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_fun_codigo)
-                                VALUES (@descricao, @preco, @estoque, 1);";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(sql, connection))
-                        {
-                            cmd.Parameters.AddWithValue("@descricao", descricao);
-                            cmd.Parameters.AddWithValue("@preco", preco);
-                            cmd.Parameters.AddWithValue("@estoque", estoque);
-                        cmd.ExecuteNonQuery();
-                        }
-
-                       MessageBox.Show("Produto cadastrado com sucesso!");
-                    listProducts();
-                    hideNewProduct();
-                    txtDescricao.Clear();
-                      txtPreco.Clear();
-                    txtEstoque.Clear();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Erro ao cadastrar produto: {ex.Message}");
-                }
-            }
     }
 }

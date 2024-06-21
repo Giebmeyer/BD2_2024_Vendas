@@ -95,11 +95,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\CadastrarProdutoForm.cs">
+    <Compile Include="Forms\CadastrarProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CadastrarProdutoForm.Designer.cs">
-      <DependentUpon>CadastrarProdutoForm.cs</DependentUpon>
+    <Compile Include="Forms\CadastrarProduto.Designer.cs">
+      <DependentUpon>CadastrarProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CadastrarUsuarioForm.cs">
       <SubType>Form</SubType>
@@ -124,8 +124,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\BackupUtility.cs" />
     <Compile Include="utils\DatabasePostgresConnection.cs" />
-    <EmbeddedResource Include="Forms\CadastrarProdutoForm.resx">
-      <DependentUpon>CadastrarProdutoForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CadastrarProduto.resx">
+      <DependentUpon>CadastrarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CadastrarUsuarioForm.resx">
       <DependentUpon>CadastrarUsuarioForm.cs</DependentUpon>
